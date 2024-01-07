@@ -105,4 +105,18 @@ public class ProductController {
         Product product = productMapper.productRequestToProduct(productRequest);
         return  ResponseEntity.ok(productService.updateProduct(id,product));
     }
+
+    @DeleteMapping(path = "/{id}")
+    @ApiOperation(value = "Delete a Product",
+            notes = "Delete an existing Product based on the id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The entry was successfully deleted based on the received request"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public void deleteProduct(@PathVariable
+                                 @Parameter(name = "id",description = "Product id",example = "1",required = true)
+                                         Long id)
+    {
+        productService.deleteById(id);
+    }
 }

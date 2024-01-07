@@ -45,6 +45,16 @@ public class EmployeeService {
             throw new NotFoundException(id.longValue());
         }
     }
+    public void deleteById(Long id){
+        Optional<Employee> employee = employeeRepository.findById(id);
+        if(employee.isPresent()){
+            employeeRepository.deleteById(id);
+        }else
+        {
+            throw new NotFoundException(id.longValue());
+        }
+
+    }
 
     public Optional<Employee> findById(long id) {
         return employeeRepository.findById(id);

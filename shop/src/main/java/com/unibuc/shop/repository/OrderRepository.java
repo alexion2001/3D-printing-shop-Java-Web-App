@@ -4,9 +4,11 @@ import com.unibuc.shop.model.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import java.util.List;
+
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    Optional<Order> findByDate(String date);
+    List<Order> findByDate(String date);
+    List<Order> findByCustomerNumber_CustomerId(long customerId);
 }

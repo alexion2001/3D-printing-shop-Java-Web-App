@@ -52,5 +52,15 @@ public class ProductService {
         }
     }
 
+    public void deleteById(Long id){
+        Optional<Product> product = productRepository.findById(id);
+        if(product.isPresent()){
+            productRepository.deleteById(id);
+        }else
+        {
+            throw new NotFoundException(id.longValue());
+        }
+
+    }
 
 }

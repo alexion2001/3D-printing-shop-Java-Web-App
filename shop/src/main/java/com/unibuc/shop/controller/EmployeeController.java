@@ -5,6 +5,7 @@ import com.unibuc.shop.mapper.*;
 import com.unibuc.shop.model.*;
 import com.unibuc.shop.services.*;
 import io.swagger.annotations.*;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -104,5 +105,19 @@ public class EmployeeController {
                     EmployeeRequest employeeRequest) {
         Employee employee = employeeMapper.employeeRequestToEmployee(employeeRequest);
         return  ResponseEntity.ok(employeeService.updateEmployee(id,employee));
+    }
+
+    @DeleteMapping(path = "/{id}")
+    @ApiOperation(value = "Delete an Employee",
+            notes = "Delete an existing Employee based on the id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The entry was successfully deleted based on the received request"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public void deleteEmployee(@PathVariable
+                                 @Parameter(name = "id",description = "Employee id",example = "1",required = true)
+                                         Long id)
+    {
+        employeeService.deleteById(id);
     }
 }
