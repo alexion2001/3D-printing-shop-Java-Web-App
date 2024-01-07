@@ -34,6 +34,8 @@ This application aims to facilitate the management of a 3D printing shop, by all
 4. Employee
 5. Order -  has one customer and at least one product
 6. Customer - may place orders
+7. Content - associative table (Order-Product)
+8. Compatibility - associative table (Filament-Printer)
 
 Entity-relationship diagram:
 
