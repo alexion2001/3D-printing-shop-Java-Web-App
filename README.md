@@ -22,9 +22,9 @@ This application aims to facilitate the management of a 3D printing shop, by all
 1. The application allows adding, editing, deleting and viewing customer data.
 2. The application allows adding, editing, deleting and viewing employees data. 
 3. The application allows adding, editing, deleting and viewing filament data to be able to manage stocks.
-4. The application allows adding, editing, deleting and viewing products data necessary for the sale and production.
+4. The application allows adding, editing, deleting and viewing products data necessary for the sale and production (the name of the filament from which it is made).
 5. The application allows adding, editing, deleting and viewing printers data, allowing the management of compatibility between products and printers to determine whether a product can be printed on a certain printer, depending on the type of filament it is made of.
-6. The application allows adding, editing, deleting and viewing orders data together with the client and the products that are part of it.
+6. The application allows adding, editing, deleting and viewing orders data together with the client and the products that are part of it. You can also filter an order by customer or date.
 
 ### Entities and relationships
 
