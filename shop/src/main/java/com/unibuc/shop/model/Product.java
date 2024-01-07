@@ -22,6 +22,12 @@ public class Product {
     public Product(long productId) {
         this.productId = productId;
     }
+    public Product(String name, double price, Filament filamentType) {
+
+        this.name = name;
+        this.price = price;
+        this.filamentType = filamentType;
+    }
 
     public Product(long productId, String name, double price, Filament filamentType) {
         this.productId = productId;

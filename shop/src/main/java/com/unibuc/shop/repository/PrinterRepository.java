@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    Optional<Employee> findByFullName(String fullName);
+public interface PrinterRepository extends JpaRepository<Printer, Long> {
+    Optional<Printer> findByName(String name);
 }

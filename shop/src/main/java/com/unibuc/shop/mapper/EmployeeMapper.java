@@ -9,4 +9,5 @@ public class EmployeeMapper {
     public Employee employeeRequestToEmployee(EmployeeRequest employeeRequest) {
         return new Employee(employeeRequest.getFullName(), employeeRequest.getMobileNumber(), employeeRequest.getSalary(), employeeRequest.getJob());
     }
+
 }

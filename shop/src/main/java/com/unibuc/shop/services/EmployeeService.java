@@ -1,7 +1,8 @@
 package com.unibuc.shop.services;
 
 import com.unibuc.shop.exception.DuplicateException;
-import com.unibuc.shop.model.Employee;
+import com.unibuc.shop.exception.NotFoundException;
+import com.unibuc.shop.model.*;
 import com.unibuc.shop.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,7 @@ public class EmployeeService {
     public List<Employee> getEmployees() {
         return employeeRepository.findAll();
     }
+
     public Employee create(Employee employee) {
         Optional<Employee> existingEmployeeSameName = employeeRepository.findByFullName(employee.getFullName());
         existingEmployeeSameName.ifPresent(e -> {
@@ -27,7 +29,27 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    public Employee updateEmployee(Long id, Employee employee)
+    {
+        Optional<Employee> existingEmployeeSameName = employeeRepository.findByFullName(employee.getFullName());
+
+        Optional<Employee> existingEmployee = employeeRepository.findById(id.longValue());
+        if(existingEmployee.isPresent()){
+            Employee emp =  existingEmployee.get();
+            emp.setJob(employee.getJob());
+            emp.setMobileNumber(employee.getMobileNumber());
+            emp.setSalary(employee.getSalary());
+            return employeeRepository.save(emp);
+        }else
+        {
+            throw new NotFoundException(id.longValue());
+        }
+    }
+
     public Optional<Employee> findById(long id) {
         return employeeRepository.findById(id);
+    }
+    public Optional<Employee> findByFullName(String name) {
+        return employeeRepository.findByFullName(name);
     }
 }

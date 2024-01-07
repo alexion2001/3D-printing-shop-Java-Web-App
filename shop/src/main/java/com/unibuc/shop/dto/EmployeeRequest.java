@@ -20,7 +20,7 @@ public class EmployeeRequest {
     @ApiModelProperty(value = "salary", required = true, notes = "The salary of the Employee", example = "2500", position = 3)
     private long  salary;
     @NotBlank
-    @ApiModelProperty(value = "job", required = true, notes = "The job of the Employee", example = "Proiectant", position = 1)
+    @ApiModelProperty(value = "job", required = true, notes = "The job of the Employee", example = "Proiectant", position = 4)
     private String job;
 
     public EmployeeRequest() {

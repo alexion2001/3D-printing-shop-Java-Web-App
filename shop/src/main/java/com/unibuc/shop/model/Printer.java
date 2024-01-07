@@ -19,6 +19,9 @@ public class Printer {
         this.printerId = printerId;
         this.name = name;
     }
+    public Printer( String name) {
+        this.name = name;
+    }
 
     public long getPrinterId() {
         return printerId;
