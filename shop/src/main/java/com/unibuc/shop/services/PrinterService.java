@@ -12,9 +12,11 @@ import java.util.Optional;
 @Service
 public class PrinterService {
     private final PrinterRepository printerRepository;
+    private final CompatibilityRepository compatibilityRepository;
 
-    public PrinterService(PrinterRepository printerRepository) {
+    public PrinterService(PrinterRepository printerRepository,CompatibilityRepository compatibilityRepository) {
         this.printerRepository = printerRepository;
+        this.compatibilityRepository = compatibilityRepository;
     }
 
     public List<Printer> getAllPrinters() {
@@ -23,6 +25,10 @@ public class PrinterService {
 
     public Optional<Printer> findById(long id) {
         return printerRepository.findById(id);
+    }
+
+    public List<Compatibility> findAllCompatibilitiesByPrinterId(long id) {
+        return compatibilityRepository.findByPrinterId(id);
     }
 
     public Optional<Printer> findByName(String name) {
@@ -35,6 +41,10 @@ public class PrinterService {
             throw new DuplicateException();
         });
         return printerRepository.save(printer);
+    }
+
+    public Compatibility createCompatibility(Compatibility compatibility) {
+        return compatibilityRepository.save(compatibility);
     }
 
     public Printer updatePrinter(Long id, Printer printer)

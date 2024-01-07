@@ -27,11 +27,12 @@ public class PrinterController {
 
     private PrinterService printerService;
     private PrinterMapper printerMapper;
+    private CompatibilityMapper compatibilityMapper;
 
-    @Autowired
-    public PrinterController(PrinterService printerService, PrinterMapper printerMapper) {
+    public PrinterController(PrinterService printerService, PrinterMapper printerMapper, CompatibilityMapper compatibilityMapper) {
         this.printerService = printerService;
         this.printerMapper = printerMapper;
+        this.compatibilityMapper = compatibilityMapper;
     }
 
     @GetMapping
@@ -70,7 +71,7 @@ public class PrinterController {
     }
 
 
-    @PostMapping
+    @PostMapping("/printer")
     @ApiOperation(value = "Create a Printer",
             notes = "Creates a new Printer based on the information received in the request")
     @ApiResponses(value = {
@@ -88,6 +89,23 @@ public class PrinterController {
                 .body(savedEntry);
     }
 
+    @PostMapping("/compatibility")
+    @ApiOperation(value = "Create a Compatibility",
+            notes = "Creates a new Compatibility beetween a Printer and a Filament")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The entry was successfully created based on the received request"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public ResponseEntity<Compatibility> createCompatibility(
+            @RequestBody
+            @ApiParam(name = "compatibility", value = "Compatibility details", required = true)
+                    CompatibilityRequest compatibilityRequest) {
+        Compatibility savedEntry = printerService.createCompatibility(
+                compatibilityMapper.compatibilityRequestToCompatibility(compatibilityRequest));
+        return ResponseEntity
+                .created(URI.create("/printer/" + savedEntry.getCompatibilityId()))
+                .body(savedEntry);
+    }
 
     @PutMapping(path = "/{id}",produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiOperation(value = "Update a Printer data",

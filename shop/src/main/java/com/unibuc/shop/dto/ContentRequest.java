@@ -2,11 +2,13 @@ package com.unibuc.shop.dto;
 
 import com.unibuc.shop.model.Order;
 import com.unibuc.shop.model.Product;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@ApiModel(value = "Content request", description = "Required details needed to create a new Content")
 public class ContentRequest {
 
 

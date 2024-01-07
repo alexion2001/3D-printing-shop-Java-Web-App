@@ -15,6 +15,7 @@ public class PrinterRequest {
     public PrinterRequest() {
     }
 
+
     public PrinterRequest(String name) {
         this.name = name;
     }
