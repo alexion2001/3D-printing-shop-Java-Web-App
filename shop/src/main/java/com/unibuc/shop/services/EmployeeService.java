@@ -31,7 +31,6 @@ public class EmployeeService {
 
     public Employee updateEmployee(Long id, Employee employee)
     {
-        Optional<Employee> existingEmployeeSameName = employeeRepository.findByFullName(employee.getFullName());
 
         Optional<Employee> existingEmployee = employeeRepository.findById(id.longValue());
         if(existingEmployee.isPresent()){
