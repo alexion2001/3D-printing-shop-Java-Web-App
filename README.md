@@ -23,7 +23,7 @@ This application aims to facilitate the management of a 3D printing shop, by all
 2. The application allows adding, editing, deleting and viewing employees data. 
 3. The application allows adding, editing, deleting and viewing filament data to be able to manage stocks.
 4. The application allows adding, editing, deleting and viewing products data necessary for the sale and production (the name of the filament from which it is made).
-5. The application allows adding, editing, deleting and viewing printers data, allowing the management of compatibility between products and printers to determine whether a product can be printed on a certain printer, depending on the type of filament it is made of.
+5. The application allows adding, editing, deleting and viewing printers data, allowing the management of compatibility between filament and printers to determine if a certain material can be use, depending on the type.
 6. The application allows adding and viewing orders data together with the client and the products that are part of it. You can also filter an order by customer or date.
 
 ### Entities and relationships
@@ -41,4 +41,8 @@ Entity-relationship diagram:
 
 ![Untitled Diagram drawio](https://github.com/alexion2001/3D-printing-shop-Java-Web-App/assets/96074975/5e6d811b-d18a-4838-a0fa-42aca0390d56)
 
+
+To use the application you can use Swagger UI:
+
+![image](https://github.com/alexion2001/3D-printing-shop-Java-Web-App/assets/96074975/d88bdb35-8ba7-4669-9967-71866eddeb52)
 
