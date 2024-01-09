@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface CompatibilityRepository extends JpaRepository<Compatibility, Long> {
-    List<Compatibility> findByPrinterId(long id);
+    List<Compatibility> findByPrinterId_PrinterId(long id);
 }

@@ -1,5 +1,7 @@
 package com.unibuc.shop.services;
 
+import com.unibuc.shop.dto.FilamentRequest;
+import com.unibuc.shop.dto.ProductDTO;
 import com.unibuc.shop.exception.DuplicateException;
 import com.unibuc.shop.exception.NotFoundException;
 import com.unibuc.shop.model.*;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PrinterService {
@@ -27,8 +30,11 @@ public class PrinterService {
         return printerRepository.findById(id);
     }
 
-    public List<Compatibility> findAllCompatibilitiesByPrinterId(long id) {
-        return compatibilityRepository.findByPrinterId(id);
+
+    public List<FilamentRequest> findAllCompatibilitiesByPrinterId(long id) {
+        return compatibilityRepository.findByPrinterId_PrinterId(id).stream()
+                .map(content -> new FilamentRequest(content.getFilamentId().getType(), content.getFilamentId().getPiecesNumber()))
+                .collect(Collectors.toList());
     }
 
     public Optional<Printer> findByName(String name) {

@@ -1,7 +1,6 @@
 package com.unibuc.shop.services;
 
-import com.unibuc.shop.exception.DuplicateException;
-import com.unibuc.shop.exception.NotFoundException;
+import com.unibuc.shop.dto.ProductDTO;
 import com.unibuc.shop.model.*;
 import com.unibuc.shop.repository.*;
 import org.springframework.stereotype.Service;
@@ -9,13 +8,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final ContentRepository contentRepository;
 
-    public OrderService(OrderRepository orderRepository) {
+    public OrderService(OrderRepository orderRepository, ContentRepository contentRepository) {
         this.orderRepository = orderRepository;
+        this.contentRepository = contentRepository;
     }
 
     public List<Order> getAllOrders() {
@@ -42,6 +44,16 @@ public class OrderService {
 
     public Order create(Order order) {
         return orderRepository.save(order);
+    }
+
+    public Content createContent(Content content) {
+        return contentRepository.save(content);
+    }
+
+    public List<ProductDTO> getOrderContent(long id) {
+        return contentRepository.findProductsByOrderId_OrderId(id).stream()
+                .map(content -> new ProductDTO(content.getProductId().getName(), content.getProductId().getPrice()))
+                .collect(Collectors.toList());
     }
 
 

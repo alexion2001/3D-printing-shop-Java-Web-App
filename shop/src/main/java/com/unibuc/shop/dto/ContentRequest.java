@@ -7,20 +7,19 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @ApiModel(value = "Content request", description = "Required details needed to create a new Content")
 public class ContentRequest {
 
-
-    @NotBlank
+    @NotNull
     @ApiModelProperty(value = "product", required = true, notes = "The product of the Content", example = "", position = 1)
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product productId;
 
-    @NotBlank
+    @NotNull
     @ApiModelProperty(value = "order", required = true, notes = "The order of the Content", example = "", position = 2)
-
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order orderId;
@@ -28,7 +27,6 @@ public class ContentRequest {
     public ContentRequest() {
 
     }
-
 
     public ContentRequest(Product productId, Order orderId) {
         this.productId = productId;

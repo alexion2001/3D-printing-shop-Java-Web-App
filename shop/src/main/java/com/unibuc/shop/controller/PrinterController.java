@@ -71,6 +71,19 @@ public class PrinterController {
     }
 
 
+    @GetMapping(path = "/{prinetrId}",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Find all compatibilities for a printer",
+            notes = "Dispaly all compatibilities for a printer based on the id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully displayed"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public List<FilamentRequest> getAllCompatibilitiesByPrinterId(long id) {
+        return  printerService.findAllCompatibilitiesByPrinterId(id);
+    }
+
+
+
     @PostMapping("/printer")
     @ApiOperation(value = "Create a Printer",
             notes = "Creates a new Printer based on the information received in the request")

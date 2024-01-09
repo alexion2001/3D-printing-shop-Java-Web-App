@@ -27,12 +27,15 @@ public class OrderController {
 
     private OrderService orderService;
     private OrderMapper orderMapper;
+    private ContentMapper contentMapper;
 
     @Autowired
-    public OrderController(OrderService orderService, OrderMapper orderMapper) {
+    public OrderController(OrderService orderService, OrderMapper orderMapper, ContentMapper contentMapper) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
+        this.contentMapper = contentMapper;
     }
+
 
     @GetMapping
     @ApiOperation(value = "Dispaly all orders",
@@ -80,9 +83,19 @@ public class OrderController {
         return  orderService.findByCustomerId(id);
     }
 
+    @GetMapping(path = "/{orderId}",produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Find products by order id",
+            notes = "Dispaly all products fron an order based on the order id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Successfully displayed"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public List<ProductDTO> getOrderContent(long id) {
+        return  orderService.getOrderContent(id);
+    }
 
-    @PostMapping
-    @ApiOperation(value = "Create a Order",
+    @PostMapping("/order")
+    @ApiOperation(value = "Create an Order",
             notes = "Creates a new Order based on the information received in the request")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "The entry was successfully created based on the received request"),
@@ -99,7 +112,23 @@ public class OrderController {
                 .body(savedEntry);
     }
 
-
+    @PostMapping("/content")
+    @ApiOperation(value = "Create an order Content",
+            notes = "Add product to an order based on the information received in the request")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "The entry was successfully created based on the received request"),
+            @ApiResponse(code = 400, message = "Validation error on the received request")
+    })
+    public ResponseEntity<Content> createContent(
+            @RequestBody
+            @ApiParam(name = "content", value = "Content details", required = true)
+                    ContentRequest contentRequest) {
+        Content savedEntry = orderService.createContent(
+                contentMapper.contentRequestToContent(contentRequest));
+        return ResponseEntity
+                .created(URI.create("/content/" + savedEntry.getContentId()))
+                .body(savedEntry);
+    }
     
 
    
