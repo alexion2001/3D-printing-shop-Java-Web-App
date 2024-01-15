@@ -42,7 +42,7 @@ Entity-relationship diagram:
 ![Untitled Diagram drawio](https://github.com/alexion2001/3D-printing-shop-Java-Web-App/assets/96074975/5e6d811b-d18a-4838-a0fa-42aca0390d56)
 
 
-To use the application you can use Swagger UI:
+To use the application you can use Swagger UI: http://localhost:8080/swagger-ui/index.html#/
 
 ![image](https://github.com/alexion2001/3D-printing-shop-Java-Web-App/assets/96074975/d88bdb35-8ba7-4669-9967-71866eddeb52)
 
